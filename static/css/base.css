@@ -1,3 +1,8 @@
 h1 {
     color: red;
 }
+
+.poll-feature {
+    stroke: red;
+    fill: gray;
+}
