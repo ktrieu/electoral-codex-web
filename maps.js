@@ -38,10 +38,6 @@ exports.load_all_mbtiles = async function() {
 
 exports.get_tile_as_JSON = function(file, zoom, x, y, callback) {
     var mbtiles = mbtiles_dir[file];
-    if (+zoom > 10) {
-        // since these are vector tiles we can just overzoom the z10 ones
-        zoom = 10
-    }
     mbtiles.getTile(zoom, x, y, (err, tile) => {
         if (err) {
             if (err === 'Error: Tile does not exist') {

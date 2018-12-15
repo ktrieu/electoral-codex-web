@@ -36,7 +36,16 @@ class VectorMap {
             .enter().append('g')
                 .each(function (tile) {
                     var g = d3.select(this);
-                    d3.json(`/maps/${tile[2]}/${tile[0]}/${tile[1]}/`)
+                    var zoom = tile[2];
+                    var x = tile[0];
+                    var y = tile[1];
+                    if (zoom > 10) {
+                        // since these are vector tiles we can just overzoom the z10 ones
+                        x = Math.floor(x / Math.pow(2, zoom - 10));
+                        y = Math.floor(y / Math.pow(2, zoom - 10));
+                        zoom = 10;
+                    }
+                    d3.json(`/maps/${zoom}/${x}/${y}/`)
                         .then(function(json) {
                             console.log(g);
                             g.selectAll('path')
