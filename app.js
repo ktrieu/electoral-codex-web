@@ -8,7 +8,9 @@ maps.load_all_mbtiles();
 var app = express();
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars')
+app.set('view engine', 'handlebars');
+
+app.use('/static', express.static('static/'));
 
 app.get('/', function(req, res) {
     res.render('home', {layout: 'base'});
