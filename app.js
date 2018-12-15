@@ -11,7 +11,7 @@ app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars')
 
 app.get('/', function(req, res) {
-    res.render('home')
+    res.render('home', {layout: 'base'});
 });
 
 app.get('/maps/:zoom/:x/:y/', function(req, res) {
