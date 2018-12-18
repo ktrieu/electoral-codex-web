@@ -21,6 +21,8 @@ class VectorMap {
             .attr('height', this.height)
             .call(this.zoom);
 
+        this.g_container = this.svg.append('g')
+
         this.projection = d3.geoMercator()
             .scale(1 / 2 / Math.PI)
             .translate([0, 0]);
@@ -39,8 +41,9 @@ class VectorMap {
             .translate([transform.x, transform.y])
             .scale(transform.k)
 
-        var groups = this.svg.selectAll('g')
-            .attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`)
+        this.g_container.attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`);
+
+        var groups = this.g_container.selectAll('g')
             .data(tiler, function (d) { return [d[0], d[1], d[2]]});
 
         groups.enter().append('g')
@@ -49,14 +52,13 @@ class VectorMap {
                 var zoom = tile[2];
                 var x = tile[0];
                 var y = tile[1];
-                g.attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`);
-                g.attr('class', `${zoom}-${x}-${y}`);
                 if (zoom > 10) {
                     // since these are vector tiles we can just overzoom the z10 ones
                     x = Math.floor(x / Math.pow(2, zoom - 10));
                     y = Math.floor(y / Math.pow(2, zoom - 10));
                     zoom = 10;
                 }
+                g.attr('id', `tile-${zoom}-${x}-${y}`)
                 d3.json(`/maps/${zoom}/${x}/${y}/`)
                     .then(function(json) {
                         g.selectAll('path')
