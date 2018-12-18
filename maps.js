@@ -43,7 +43,7 @@ exports.get_tile_as_JSON = function(file, zoom, x, y, callback) {
             if (err === 'Error: Tile does not exist') {
                 //empty tiles are clipped away, so just return an empty object
                 //if the tile does not exist.
-                callback({});
+                callback(undefined, {});
                 return;
             }
             else {
@@ -61,7 +61,7 @@ exports.get_tile_as_JSON = function(file, zoom, x, y, callback) {
             for (var i = 0; i < layer.length; i++) {
                 geo_json.features.push(layer.feature(i).toGeoJSON(x, y, zoom));
             }
-            callback(geo_json);
+            callback(undefined, geo_json);
             return;
         })
     })
