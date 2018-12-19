@@ -24,7 +24,7 @@ class VectorMap {
         this.g_container = this.svg.append('g')
 
         this.projection = d3.geoMercator()
-            .scale(1 / 2 / Math.PI)
+            .scale(10000 / 2 / Math.PI)
             .translate([0, 0]);
 
         this.path = d3.geoPath()
@@ -39,12 +39,14 @@ class VectorMap {
         var tiler = d3.tile()
             .size([this.width, this.height])
             .translate([transform.x, transform.y])
-            .scale(transform.k)
+            .scale(10000 * transform.k)
 
         this.g_container.attr('transform', `translate(${transform.x},${transform.y}) scale(${transform.k})`);
 
+        console.log(transform.k);
+
         var groups = this.g_container.selectAll('g')
-            .data(tiler, function (d) { return [d[0], d[1], d[2]]});
+            .data(tiler, function (d) { return `${d[2]}-${d[0]}-${d[1]}`});
 
         groups.enter().append('g')
             .each(function (tile) {
@@ -52,11 +54,13 @@ class VectorMap {
                 var zoom = tile[2];
                 var x = tile[0];
                 var y = tile[1];
-                if (zoom > 10) {
+
+                var max_zoom = 11;
+                if (zoom > max_zoom) {
                     // since these are vector tiles we can just overzoom the z10 ones
-                    x = Math.floor(x / Math.pow(2, zoom - 10));
-                    y = Math.floor(y / Math.pow(2, zoom - 10));
-                    zoom = 10;
+                    x = Math.floor(x / Math.pow(2, zoom - max_zoom));
+                    y = Math.floor(y / Math.pow(2, zoom - max_zoom));
+                    zoom = max_zoom;
                 }
                 g.attr('id', `tile-${zoom}-${x}-${y}`)
                 d3.json(`/maps/${zoom}/${x}/${y}/`)
