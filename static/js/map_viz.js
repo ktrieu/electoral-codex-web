@@ -55,7 +55,7 @@ class VectorMap {
                 var x = tile[0];
                 var y = tile[1];
 
-                var max_zoom = 11;
+                var max_zoom = 12;
                 if (zoom > max_zoom) {
                     // since these are vector tiles we can just overzoom the z10 ones
                     x = Math.floor(x / Math.pow(2, zoom - max_zoom));
