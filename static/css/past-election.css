@@ -1,3 +1,13 @@
 #map-main {
     height: 600px;
 }
+
+/* customize the default mapbox popups */
+.mapboxgl-popup-tip {
+    visibility: hidden !important;
+}
+
+.mapboxgl-popup-content {
+    border-radius: 0px !important;
+    width: 300px !important;
+}
