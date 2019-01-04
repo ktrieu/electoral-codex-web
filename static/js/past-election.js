@@ -4,7 +4,7 @@ popupContent = function(ridingData) {
         <h4 class="border-bottom">${ridingData.name}</h3>
         <div class="row">
             <div class="col-sm">
-                <p>${ridingData.results[0].party}</p>
+                <p class="solid-${ridingData.results[0].party}">${ridingData.results[0].party}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[0].percent}%</p>
@@ -13,7 +13,7 @@ popupContent = function(ridingData) {
         </div>
         <div class="row">
             <div class="col-sm">
-                <p>${ridingData.results[1].party}</p>
+                <p class="solid-${ridingData.results[1].party}">${ridingData.results[1].party}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[1].percent}%</p>
@@ -22,7 +22,7 @@ popupContent = function(ridingData) {
         </div>
         <div class="row">
             <div class="col-sm">
-                <p>${ridingData.results[2].party}</p>
+                <p class="solid-${ridingData.results[2].party}">${ridingData.results[2].party}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[2].percent}%</p>
