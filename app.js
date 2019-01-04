@@ -15,14 +15,13 @@ app.set('view engine', 'handlebars');
 
 app.use('/static', express.static('static/'));
 
-renderTemplate = function(res, template, params) {
-    var context = { customCss : [template], customJs : [template] };
-    Object.assign(context, params);
-    res.render(template, context);
-}
 
 app.get('/', function(req, res) {
-    renderTemplate(res, 'past-election', { mapbox_key : process.env.MAPBOX_KEY });
+    res.render('past-election', { 
+        mapbox_key : process.env.MAPBOX_KEY,
+        js: ['past-election', 'vote-popup'],
+        css: ['past-election', 'vote-popup']
+    });
 });
 
 app.listen(3000);

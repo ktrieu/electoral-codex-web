@@ -8,7 +8,7 @@
     <link rel="stylesheet" href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css'/>
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans:400,700i" rel="stylesheet">     <link rel="stylesheet" href="/static/css/base.css">
 
-    {{#each customCss}}
+    {{#each css}}
     <link rel="stylesheet" href="/static/css/{{this}}.css">
     {{/each}}
 </head>
@@ -22,7 +22,7 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
 
-    {{#each customJs}}
+    {{#each js}}
     <script src="/static/js/{{this}}.js"></script>
     {{/each}}
 </body>

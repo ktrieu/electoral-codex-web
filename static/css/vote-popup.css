@@ -1,0 +1,34 @@
+/* customize the default mapbox popups */
+.mapboxgl-popup-tip {
+    visibility: hidden !important;
+}
+
+.mapboxgl-popup-content {
+    border-radius: 0px !important;
+    width: 300px !important;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: bold;
+}
+
+.popup-content p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.75em;
+    margin-bottom: 0px;
+}
+
+.popup-content p.text-muted {
+    font-size: 1em;
+}
+
+.popup-content .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
