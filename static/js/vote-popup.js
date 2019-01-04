@@ -4,7 +4,7 @@ popupContent = function(ridingData) {
         <h4 class="border-bottom">${ridingData.name}</h3>
         <div class="row">
             <div class="col-sm">
-                <p class="solid-${ridingData.results[0].party}">${ridingData.results[0].party}</p>
+                <p class="solid-${ridingData.results[0].partyCode}">${ridingData.results[0].partyName}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[0].percent}%</p>
@@ -13,7 +13,7 @@ popupContent = function(ridingData) {
         </div>
         <div class="row">
             <div class="col-sm">
-                <p class="solid-${ridingData.results[1].party}">${ridingData.results[1].party}</p>
+                <p class="solid-${ridingData.results[1].partyCode}">${ridingData.results[1].partyName}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[1].percent}%</p>
@@ -22,7 +22,7 @@ popupContent = function(ridingData) {
         </div>
         <div class="row">
             <div class="col-sm">
-                <p class="solid-${ridingData.results[2].party}">${ridingData.results[2].party}</p>
+                <p class="solid-${ridingData.results[2].partyCode}">${ridingData.results[2].partyName}</p>
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[2].percent}%</p>
@@ -51,7 +51,8 @@ updatePopup = function(popup, e) {
     var resultArray = [];
     for (var i = 0; i < 3; i++) {
         resultArray.push({
-            party : votePairs[i][0],
+            partyCode : votePairs[i][0],
+            partyName : getPartyFullName(votePairs[i][0]),
             percent : (100 * votePairs[i][1] / totalVote).toFixed(2),
             votes: votePairs[i][1]
         });
