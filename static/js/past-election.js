@@ -8,6 +8,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[0].percent}%</p>
+                <p class="text-right text-muted">${ridingData.results[0].votes} votes</p>
             </div>
         </div>
         <div class="row">
@@ -16,6 +17,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[1].percent}%</p>
+                <p class="text-right text-muted">${ridingData.results[1].votes} votes</p>
             </div>
         </div>
         <div class="row">
@@ -24,6 +26,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[2].percent}%</p>
+                <p class="text-right text-muted">${ridingData.results[2].votes} votes</p>
             </div>
         </div>
     </div>
@@ -49,7 +52,8 @@ updatePopup = function(popup, e) {
     for (var i = 0; i < 3; i++) {
         resultArray.push({
             party : votePairs[i][0],
-            percent : (100 * votePairs[i][1] / totalVote).toFixed(2)
+            percent : (100 * votePairs[i][1] / totalVote).toFixed(2),
+            votes: votePairs[i][1]
         });
     }
     var ridingData = {
