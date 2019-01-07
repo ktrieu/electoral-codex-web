@@ -13,6 +13,16 @@ $(document).ready(function () {
         })
         mapboxMap.fitBounds(bounds, {padding : 20});
 
+        //add a poll stroke to the map's style
+        var style = mapboxMap.getStyle();
+        style.layers.forEach(layer => {
+            if (layer.id === 'polls') {
+                layer.paint['fill-outline-color'] = 'rgba(255, 255, 255, 1)';
+            }
+        });
+
+        mapboxMap.setStyle(style);
+
         mapboxMap.setFilter('polls', [
             '==', ['get', 'R'], RIDING_NUM
         ]);
