@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 
     mapboxMap.on('click', 'ridings-fill', function(e) {
-        window.location.href = `riding/${e.features[0].properties.R}`;
+        window.location.href = `/${YEAR}/riding/${e.features[0].properties.R}`;
     });
 
 });
