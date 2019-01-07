@@ -7,6 +7,13 @@ $(document).ready(function () {
         zoom: 2.8
     });
 
+    mapboxMap.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    }));
+
     var ridingPopup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false

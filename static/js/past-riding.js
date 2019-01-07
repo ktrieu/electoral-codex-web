@@ -6,6 +6,13 @@ $(document).ready(function () {
         style: mapboxStyleIds[YEAR],
     });
 
+    mapboxMap.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    }));
+
     mapboxMap.on('load', function(e) {
         var bounds = new mapboxgl.LngLatBounds()
         MAP_BOUNDS.forEach(coords => {
