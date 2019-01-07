@@ -25,4 +25,8 @@ $(document).ready(function () {
         updatePopup(ridingPopup, e);
     });
 
+    mapboxMap.on('click', 'ridings-fill', function(e) {
+        window.location.href = `riding/${e.features[0].properties.R}`;
+    });
+
 });
