@@ -21,3 +21,16 @@
 .solid-OTH {
     color: #ababab;
 }
+
+.nav-item {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: bold;
+    /* for some reason navbar brand and nav items are not vertically aligned,
+    so we have to nudge them back into place */
+    margin-top: 3px;
+}
+
+.navbar-brand {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: bold;
+}
