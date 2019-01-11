@@ -1,3 +1,25 @@
 #map-main {
     height: 600px;
 }
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.vertical-block {
+    margin-bottom: 10px;
+}
+
+.vertical-block * {
+    margin-bottom: 0px;
+}
+
+.election-header {
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+    font-size: 7vw;
+}
+
+.leader-name {
+    font-size: 6vw;
+}

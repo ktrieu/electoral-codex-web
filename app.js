@@ -1,6 +1,8 @@
 var express = require('express');
 var handlebars = require('express-handlebars');
 
+var db = require('./db.js');
+
 //load in static data files
 var riding_bounds = {
     2004: require('./json_data/bounds_2004.json')
@@ -15,6 +17,7 @@ var handlebarOpts = {
     }
 }
 
+
 app.engine('handlebars', handlebars(handlebarOpts));
 app.set('view engine', 'handlebars');
 
@@ -25,11 +28,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:year', function(req, res) {
-    res.render('past-election', { 
-        mapbox_key: process.env.MAPBOX_KEY,
-        js: ['past-election', 'vote-popup'],
-        css: ['past-election', 'vote-popup'],
-        year: req.params.year
+    db.get_summary_data(req.params.year).then(function(summary) {
+        res.render('past-election', { 
+            mapbox_key: process.env.MAPBOX_KEY,
+            js: ['past-election', 'vote-popup'],
+            css: ['past-election', 'vote-popup'],
+            year: req.params.year,
+            summary : summary
+        });
+    }).catch(function(err) {
+        res.send(err);
     });
 });
 

@@ -4,6 +4,11 @@
 </script>
 
 <div class="container">
-    <h1>Mapping Test:</h1>
+    <h1 class='election-header'>{{year}} Federal Election</h1>
+    <div class='vertical-block'>
+        <h1 class='solid-{{summary.winner.party}} leader-name'>{{summary.winner.leader}}</h1>
+        <p>and the <span class='solid-{{summary.winner.party}}'> {{summary.winner.party}}</span>
+        won the most seats, with {{summary.winner.seats}} out of {{summary.total.seats}}</p>
+    </div>
     <div id="map-main"></div>
 </div>
