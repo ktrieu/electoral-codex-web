@@ -1,14 +1,19 @@
 <script>
     MAPBOX_KEY = '{{mapbox_key}}'
     YEAR = '{{year}}'
+    SUMMARY = {{{json summary}}}
 </script>
 
 <div class="container">
     <h1 class='election-header'>{{year}} Federal Election</h1>
+    {{#with summary}}
     <div class='vertical-block'>
-        <h1 class='solid-{{summary.winner.party}} leader-name'>{{summary.winner.leader}}</h1>
-        <p>and the <span class='solid-{{summary.winner.party}}'> {{summary.winner.party}}</span>
-        won the most seats, with {{summary.winner.seats}} out of {{summary.total.seats}}</p>
+        <h1 class='solid-{{winner.party}} leader-name'>{{winner.leader}}</h1>
+        <p>and the <span class='solid-{{winner.party}}'> {{party_noun winner.party}}</span>
+        won the most seats, with {{winner.seats}} out of {{total.seats}} 
+        ({{majority_seats total.seats}} needed for a majority)</p>
     </div>
+    {{/with}}
+    <div id='seats-graph'></div>
     <div id="map-main"></div>
 </div>

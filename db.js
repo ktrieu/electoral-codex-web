@@ -22,9 +22,10 @@ module.exports.get_summary_data = async function(year) {
         votes: summary_rows[1].votes,
         leader: summary_rows[1].leader
     }
+    result.parties = {};
     for (var i = 0; i < summary_rows.length; i++) {
         var row = summary_rows[i];
-        result[row.party] = {
+        result.parties[row.party] = {
             seats: row.seats,
             votes: row.votes,
             leader: row.leader

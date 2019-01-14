@@ -1,25 +1,31 @@
 .solid-BQ {
     color: #51bfe3; 
+    fill: #51bfe3;
 }
 
 .solid-CON {
     color: #0c4794;
+    fill: #0c4794
 }
 
 .solid-GRN {
     color: #3b9633;
+    fill: #3b9633;
 }
 
 .solid-LIB {
     color: #d2181f;
+    fill: #d2181f;
 }
 
 .solid-NDP {
     color: #f04920;
+    fill: #f04920
 }
 
 .solid-OTH {
     color: #ababab;
+    fill: #ababab;
 }
 
 .nav-item {

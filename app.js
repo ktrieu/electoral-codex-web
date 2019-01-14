@@ -2,6 +2,7 @@ var express = require('express');
 var handlebars = require('express-handlebars');
 
 var db = require('./db.js');
+var helpers = require('./helpers.js')
 
 //load in static data files
 var riding_bounds = {
@@ -13,7 +14,9 @@ var app = express();
 var handlebarOpts = {
     defaultLayout: 'base',
     helpers : {
-        json : function(ctx) { JSON.stringify(ctx) }
+        json : JSON.stringify,
+        party_noun: helpers.party_to_noun,
+        majority_seats: helpers.majority_seats
     }
 }
 
