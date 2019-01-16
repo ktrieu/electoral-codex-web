@@ -27,3 +27,9 @@ body {
 .leader-name {
     font-size: 6vw;
 }
+
+.bar-label {
+    font-family: 'IBM Plex Mono';
+    text-anchor: 'start';
+    font-size: 1.2em;
+}

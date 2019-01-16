@@ -46,6 +46,22 @@ majorityThreshold = function(totalSeats) {
     }
 }
 
+seatsMouseEnter = function(d, i, nodes) {
+    d3.selectAll('.chart-group')
+        .filter(`[data-party=${d.key}]`)
+        .selectAll('*')
+        .transition()
+            .style('opacity', 1.0);
+}
+
+seatsMouseExit = function(d, i, nodes) {
+    d3.selectAll('.chart-group')
+        .filter(`[data-party=${d.key}`)
+        .select('polygon')
+        .transition()
+            .style('opacity', 0.5);
+}
+
 createSeatsGraph = function() {
     var container = d3.select('#seats-graph');
     var containerWidth = container.node().clientWidth;
@@ -111,36 +127,78 @@ createSeatsGraph = function() {
 
     var barHeight = height / 3;
 
-    var entry = svg.selectAll()
-        .data(stack(seatsData))
-        .enter();
+    seatsBar = function(d, i, nodes) {
+        var seatsLeft = seatsScale(d[0][0]);
+        var seatsRight = seatsScale(d[0][1]);
+        var votesLeft = votesScale(d[1][0]);
+        var votesRight = votesScale(d[1][1]);
 
-    entry.append('rect')
-        .attr('x', d => { return seatsScale(d[0][0]) })
-        .attr('y', 0)
-        .attr('width', d => { return seatsScale(d[0][1]) - seatsScale(d[0][0]) })
-        .attr('height', barHeight)
-        .attr('class', d => { return `solid-${d.key}` });
+        var group = d3.select(this);
 
-    entry.append('rect')
-        .attr('x', d => { return votesScale(d[1][0]) })
-        .attr('y', barHeight * 2)
-        .attr('width', d => { return votesScale(d[1][1]) - votesScale(d[1][0]) })
-        .attr('height', barHeight)
-        .attr('class', d => { return `solid-${d.key}` });
+        group.append('rect')
+            .attr('x', seatsLeft)
+            .attr('y', 0)
+            .attr('width', seatsRight - seatsLeft)
+            .attr('height', barHeight)
+            .attr('class', `solid-${d.key}`)
+            .on('mouseenter', seatsMouseEnter)
+            .on('mouseleave', seatsMouseExit);
 
-    generatePolygonPoints = function(d) {
-        var topLeft = [seatsScale(d[0][0]), barHeight];
-        var topRight = [seatsScale(d[0][1]), barHeight];
-        var bottomLeft = [votesScale(d[1][0]), barHeight * 2];
-        var bottomRight = [votesScale(d[1][1]), barHeight * 2];
-        return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
+        group.append('rect')
+            .attr('x', votesLeft)
+            .attr('y', barHeight * 2)
+            .attr('width', votesRight - votesLeft)
+            .attr('height', barHeight)
+            .attr('class', `solid-${d.key}`)
+            .on('mouseenter', seatsMouseEnter)
+            .on('mouseleave', seatsMouseExit);
+
+        var polygonPoints = `${[seatsLeft, barHeight]}, ${[seatsRight, barHeight]},
+                             ${[votesRight, barHeight * 2]}, ${[votesLeft, barHeight * 2]}`;
+        group.append('polygon')
+            .attr('points', polygonPoints)
+            .attr('class', `solid-${d.key}`)
+            .style('opacity', 0.5)
+            .on('mouseenter', seatsMouseEnter)
+            .on('mouseleave', seatsMouseExit);
     }
 
-    entry.append('polygon')
-        .attr('points', generatePolygonPoints)
-        .attr('class', d => { return `solid-${d.key}`})
-        .style('opacity', 0.5);
+    svg.selectAll()
+        .data(stack(seatsData))
+        .enter()
+            .append('g')
+            .attr('class', 'chart-group')
+            .attr('data-party', d => { return d.key })
+            .each(seatsBar)
+
+    //add static stuff
+    svg.append('line')
+        .attr('x1', 0)
+        .attr('x2', width)
+        .attr('y1', barHeight)
+        .attr('y2', barHeight)
+        .style('stroke', 'black');
+
+    svg.append('line')
+        .attr('x1', 0)
+        .attr('x2', width)
+        .attr('y1', barHeight * 2)
+        .attr('y2', barHeight * 2)
+        .style('stroke', 'black');
+
+    svg.append('text')
+        .text('Seats')
+        .attr('class', 'bar-label')
+        .attr('dominant-baseline', 'middle')
+        .attr('x', 15)
+        .attr('y', barHeight / 2);
+
+    svg.append('text')
+        .text('Votes')
+        .attr('class', 'bar-label')
+        .attr('dominant-baseline', 'middle')
+        .attr('x', 15)
+        .attr('y', barHeight * 2.5);
 }
 
 $(document).ready(function () {
