@@ -1,3 +1,49 @@
+seatsPopup = function(d, summary) {
+    var party = d.key;
+    var seats = summary.parties[party].seats;
+    var votes = summary.parties[party].votes;
+
+    var seatsPercent = 100 * seats / summary.total.seats;
+    var votesPercent = 100 * votes / summary.total.votes;
+
+    var averageSeatRatio = summary.total.votes / summary.total.seats;
+    var seatRatio = votes / seats;
+    var efficiencyIndex = averageSeatRatio / seatRatio;
+
+    var html = `
+    <div class='container popup-content'>
+        <h4 class='border-bottom solid-${d.key}'>${getPartyFullName(d.key)}</h4>
+        <div class="row">
+            <div class="col-sm">
+                <p>Seats:</p>
+            </div>
+            <div class="col-sm text-right">
+                <p>${seatsPercent.toFixed(2)}%</p>
+                <p class="text-right text-muted">${seats} seats</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>Votes:</p>
+            </div>
+            <div class="col-sm text-right">
+                <p>${votesPercent.toFixed(2)}%</p>
+                <p class="text-right text-muted">${votes.toLocaleString()} votes</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>Voter Efficiency:</p>
+            </div>
+            <div class="col-sm text-right">
+                <p>${efficiencyIndex.toFixed(2)}</p>
+            </div>
+        </div>
+    </div>`
+
+    return html;
+}
+
 popupContent = function(ridingData) {
     return `
     <div class="popup-content">

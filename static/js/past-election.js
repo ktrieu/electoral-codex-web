@@ -46,22 +46,6 @@ majorityThreshold = function(totalSeats) {
     }
 }
 
-seatsMouseEnter = function(d, i, nodes) {
-    d3.selectAll('.chart-group')
-        .filter(`[data-party=${d.key}]`)
-        .selectAll('*')
-        .transition()
-            .style('opacity', 1.0);
-}
-
-seatsMouseExit = function(d, i, nodes) {
-    d3.selectAll('.chart-group')
-        .filter(`[data-party=${d.key}`)
-        .select('polygon')
-        .transition()
-            .style('opacity', 0.5);
-}
-
 createSeatsGraph = function() {
     var container = d3.select('#seats-graph');
     var containerWidth = container.node().clientWidth;
@@ -124,6 +108,32 @@ createSeatsGraph = function() {
         .keys(['BQ', 'CON', 'GRN', 'LIB', 'NDP', 'OTH'])
         .order(d3.stackOrderDescending)
         .offset(d3.stackOffsetNone);
+
+    var tip = d3.tip()
+        .direction('s')
+        .offset([15, 0])
+        .html(d => {return seatsPopup(d, SUMMARY) });
+    
+    svg.call(tip);
+
+    seatsMouseEnter = function(d, i, nodes) {
+        var group = d3.selectAll('.chart-group')
+            .filter(`[data-party=${d.key}]`);
+        group.selectAll('*')
+            .transition()
+                .style('opacity', 1.0);
+        //select the lower rectangle, which is always present
+        tip.show(d, group.selectAll('rect').nodes()[1]);
+    }
+    
+    seatsMouseExit = function(d, i, nodes) {
+        var group = d3.selectAll('.chart-group')
+            .filter(`[data-party=${d.key}`);
+        group.select('polygon')
+            .transition()
+                .style('opacity', 0.5);
+        tip.hide();
+    }
 
     var barHeight = height / 3;
 

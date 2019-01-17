@@ -9,8 +9,11 @@
 }
 
 .popup-content {
+    position: relative;
     display: flex;
     flex-direction: column;
+    background: white;
+    z-index: 999;
 }
 
 .popup-content h4 {
