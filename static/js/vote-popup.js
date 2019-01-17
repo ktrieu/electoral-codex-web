@@ -54,7 +54,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[0].percent}%</p>
-                <p class="text-right text-muted">${ridingData.results[0].votes} votes</p>
+                <p class="text-right text-muted">${ridingData.results[0].votes.toLocaleString()} votes</p>
             </div>
         </div>
         <div class="row">
@@ -63,7 +63,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[1].percent}%</p>
-                <p class="text-right text-muted">${ridingData.results[1].votes} votes</p>
+                <p class="text-right text-muted">${ridingData.results[1].votes.toLocaleString()} votes</p>
             </div>
         </div>
         <div class="row">
@@ -72,7 +72,7 @@ popupContent = function(ridingData) {
             </div>
             <div class="col-sm text-right">
                 <p>${ridingData.results[2].percent}%</p>
-                <p class="text-right text-muted">${ridingData.results[2].votes} votes</p>
+                <p class="text-right text-muted">${ridingData.results[2].votes.toLocaleString()} votes</p>
             </div>
         </div>
     </div>
