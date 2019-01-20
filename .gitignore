@@ -87,3 +87,4 @@ typings/
 !.vscode/extensions.json
 
 db/*
+.openode
