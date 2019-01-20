@@ -8,7 +8,12 @@ seatsPopup = function(d, summary) {
 
     var averageSeatRatio = summary.total.votes / summary.total.seats;
     var seatRatio = votes / seats;
-    var efficiencyIndex = averageSeatRatio / seatRatio;
+    //cover divides by zero
+    if (seats == 0) {
+        seatRatio = 0;
+    }
+    var efficiencyIndex = seatRatio / averageSeatRatio;
+
 
     var html = `
     <div class='container popup-content'>
@@ -33,10 +38,11 @@ seatsPopup = function(d, summary) {
         </div>
         <div class="row">
             <div class="col-sm">
-                <p>Voter Efficiency:</p>
+                <p>Votes/Seat:</p>
             </div>
             <div class="col-sm text-right">
-                <p>${efficiencyIndex.toFixed(2)}</p>
+                <p>${Math.round(seatRatio).toLocaleString()}</p>
+                <p class="text-right text-muted">${efficiencyIndex.toFixed(2)}x     average</p>
             </div>
         </div>
     </div>`
