@@ -49,13 +49,18 @@ app.get('/:year', function(req, res) {
 });
 
 app.get('/:year/riding/:riding_num', function(req, res) {
-    res.render('past-riding', {
-       mapbox_key : process.env.MAPBOX_KEY,
-       js: ['past-riding', 'vote-popup'],
-       css: ['past-riding', 'vote-popup'],
-       year: req.params.year,
-       riding_num : req.params.riding_num,
-       map_bounds: JSON.stringify(riding_bounds[req.params.year][req.params.riding_num][0])
+    db.get_riding_data(req.params.year, req.params.riding_num).then(function (riding_data) {
+        res.render('past-riding', {
+            mapbox_key : process.env.MAPBOX_KEY,
+            js: ['past-riding', 'vote-popup'],
+            css: ['past-riding', 'vote-popup'],
+            year: req.params.year,
+            riding_num : req.params.riding_num,
+            riding: riding_data,
+            map_bounds: riding_bounds[req.params.year][req.params.riding_num][0]
+        });
+    }).catch(function (err) {
+        res.send(err);
     });
 })
 

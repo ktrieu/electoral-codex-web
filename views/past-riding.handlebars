@@ -2,10 +2,12 @@
     MAPBOX_KEY = '{{mapbox_key}}'
     YEAR = '{{year}}'
     RIDING_NUM = {{riding_num}}
-    MAP_BOUNDS = {{map_bounds}}
+    MAP_BOUNDS = {{{json map_bounds}}}
+    RIDING = {{{json riding}}}
 </script>
 
 <div class="container">
-    <h1>Riding Test:</h1>
+    <h1 class='riding-header'>{{riding.name}}</h1>
+    <p class='text-muted year-label'>{{year}} RESULTS</p>
     <div id="map-riding"></div>
 </div>

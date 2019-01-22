@@ -1,3 +1,14 @@
 #map-riding {
     height: 600px;
 }
+
+.riding-header {
+    border-bottom: 2px solid black;
+    font-size: 4vw;
+}
+
+.year-label {
+    font-family: 'IBM Plex Mono';
+    margin-bottom: 20px;
+    font-size: 2vw;
+}
