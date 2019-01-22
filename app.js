@@ -6,7 +6,11 @@ var helpers = require('./helpers.js')
 
 //load in static data files
 var riding_bounds = {
-    2004: require('./json_data/bounds_2004.json')
+    2004: require('./json_data/bounds_2004.json'),
+    2006: require('./json_data/bounds_2006.json'),
+    2008: require('./json_data/bounds_2008.json'),
+    2011: require('./json_data/bounds_2011.json'),
+    2015: require('./json_data/bounds_2015.json')
 };
 
 var app = express();
