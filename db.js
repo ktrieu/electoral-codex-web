@@ -51,8 +51,8 @@ module.exports.get_riding_data = async function(year, riding_num) {
     }
     for (var i = 0; i < vote_results.length; i++) {
         vote_results[i].percent = vote_results[i].result / total_votes;
-        riding.votes[vote_results[i].party] = vote_results[i];
     }
+    riding.results = vote_results;
     //remove double hyphens in riding name
     riding.name = riding.name.replace(/--/g, '-');
     riding.total_votes = total_votes;

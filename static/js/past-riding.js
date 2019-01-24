@@ -1,7 +1,7 @@
 initVoteGraph = function() {
-    var barHeight = 80  ;
-    var resultsData = Object.entries(RIDING.votes).sort((a, b) => { return a[1].result < b[1].result; });
-    var height = resultsData.length * barHeight;
+    console.log(RIDING.results);
+    var barHeight = 80;
+    var height = RIDING.results.length * barHeight;
 
     var margin = {top: 50, left: 200, right: 120, bottom: 20};
     var container = d3.select('#vote-graph');
@@ -19,32 +19,33 @@ initVoteGraph = function() {
         .attr('height', height)
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    var parties = resultsData.map(x => { return x[0]; });
-    console.log(parties);
+    var names = RIDING.results.map(result => { return result.name; });
+    console.log(names);
     
     var partiesScale = d3.scaleBand()
-        .domain(parties)
+        .domain(names)
         .range([0, height])
         .padding(0.1);
-
+    
     var percentScale = d3.scaleLinear()
         .domain([0, 1])
         .range([0, width]);
 
     svg.selectAll()
-        .data(resultsData)
+        .data(RIDING.results)
         .enter()
             .append('rect')
             .attr('x', 0)
-            .attr('y', d => { return partiesScale(d[0]); })
+            .attr('y', d => { console.log(d.name); 
+                return partiesScale(d.name); })
             .attr('height', partiesScale.bandwidth())
-            .attr('class', d => { return `solid-${d[0]}`; })
+            .attr('class', d => { return `solid-${d.party}`; })
             .transition()
                 .duration(1000)
-                .attr('width', d => { return percentScale(d[1].percent); });
+                .attr('width', d => { return percentScale(d.percent); });
 
     var partiesAxis = d3.axisLeft(partiesScale)
-        .ticks(parties)
+        .ticks(names)
         .tickFormat(d => { '' });
 
     var axisText = svg.append('g')
@@ -54,10 +55,10 @@ initVoteGraph = function() {
     setAxisText = function(d, i) {
         var text = d3.select(this)
         text.append('tspan')
-            .text(getPartyFullName(resultsData[i][1].party))
+            .text(getPartyFullName(RIDING.results[i].party))
             .attr('x', -10)
         text.append('tspan')
-            .text(resultsData[i][1].name)
+            .text(RIDING.results[i].name)
             .style('font-size', '12px')
             .attr('x', -10)
             .attr('dy', '15px')
