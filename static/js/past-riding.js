@@ -1,5 +1,4 @@
 initVoteGraph = function() {
-    console.log(RIDING.results);
     var barHeight = 80;
     var height = RIDING.results.length * barHeight;
 
