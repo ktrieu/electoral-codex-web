@@ -36,18 +36,25 @@ module.exports.get_summary_data = async function(year) {
 
 module.exports.get_riding_data = async function(year, riding_num) {
     var db = await databases[year];
-    var result = {};
-    result.votes = {};
+    var riding = {};
+    riding.votes = {};
     var riding_summary = await db.get(`SELECT * FROM ridings WHERE riding_id == ${riding_num}`);
-    Object.assign(result, riding_summary);
+    Object.assign(riding, riding_summary);
     var vote_results = await db.all(`SELECT riding_candidates.result, candidates.name, candidates.party
                                 FROM riding_candidates
                                 INNER JOIN candidates ON candidates.cand_id == riding_candidates.cand_id
                                 WHERE riding_candidates.riding_id == ${riding_num}`);
+    var total_votes = 0;
     for (var i = 0; i < vote_results.length; i++) {
-        result.votes[vote_results[i].party] = vote_results[i];
+        total_votes += vote_results[i].result;
+    }
+    for (var i = 0; i < vote_results.length; i++) {
+        vote_results[i].percent = vote_results[i].result / total_votes;
+        console.log(vote_results[i]);
+        riding.votes[vote_results[i].party] = vote_results[i];
     }
     //remove double hyphens in riding name
-    result.name = result.name.replace(/--/g, '-');
-    return result;
+    riding.name = riding.name.replace(/--/g, '-');
+    riding.total_votes = total_votes;
+    return riding;
 }   
