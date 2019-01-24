@@ -1,6 +1,14 @@
-initVoteGraph = function() {
+initVoteGraph = function(numBars) {
+    //clear the initial div
+    d3.select('#vote-graph').selectAll('*').remove();
+    if (numBars == undefined) {
+        var results = RIDING.results;
+    }
+    else {
+        var results = RIDING.results.slice(0, numBars)
+    }
     var barHeight = 80;
-    var height = RIDING.results.length * barHeight;
+    var height = results.length * barHeight;
 
     var margin = {top: 50, left: 200, right: 120, bottom: 20};
     var container = d3.select('#vote-graph');
@@ -18,8 +26,7 @@ initVoteGraph = function() {
         .attr('height', height)
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    var names = RIDING.results.map(result => { return result.name; });
-    console.log(names);
+    var names = results.map(result => { return result.name; });
     
     var partiesScale = d3.scaleBand()
         .domain(names)
@@ -31,7 +38,7 @@ initVoteGraph = function() {
         .range([0, width]);
 
     svg.selectAll()
-        .data(RIDING.results)
+        .data(results)
         .enter()
             .append('rect')
             .attr('x', 0)
@@ -54,10 +61,10 @@ initVoteGraph = function() {
     setAxisText = function(d, i) {
         var text = d3.select(this)
         text.append('tspan')
-            .text(getPartyFullName(RIDING.results[i].party))
+            .text(getPartyFullName(results[i].party))
             .attr('x', -10)
         text.append('tspan')
-            .text(RIDING.results[i].name)
+            .text(results[i].name)
             .style('font-size', '12px')
             .attr('x', -10)
             .attr('dy', '15px')
@@ -142,6 +149,20 @@ $(document).ready(function () {
         updatePopup(pollPopup, e);
     });
 
-    initVoteGraph();
+    initVoteGraph(3);
+    var voteGraphExpanded = false;
+    d3.select('#expand-button').on('click', function(e) {
+        var expanded = d3.local();
+        if (voteGraphExpanded == false) {
+            initVoteGraph();
+            voteGraphExpanded = true;
+            d3.select(this).text('Hide minor candidates');
+        }
+        else {
+            initVoteGraph(3)
+            voteGraphExpanded = false;
+            d3.select(this).text('View all candidates');
+        }
+    });
 
 });

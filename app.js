@@ -32,7 +32,7 @@ app.set('view engine', 'handlebars');
 app.use('/static', express.static('static/'));
 
 app.get('/', function(req, res) {
-    res.redirect('/2004');
+    res.redirect('/2015');
 });
 
 app.get('/:year', function(req, res) {
