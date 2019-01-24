@@ -12,3 +12,8 @@
     margin-bottom: 20px;
     font-size: 2vw;
 }
+
+.winner-name {
+    font-family: 'IBM Plex Sans';
+    font-size: 5vw;
+}

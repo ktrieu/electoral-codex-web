@@ -43,7 +43,8 @@ module.exports.get_riding_data = async function(year, riding_num) {
     var vote_results = await db.all(`SELECT riding_candidates.result, candidates.name, candidates.party
                                 FROM riding_candidates
                                 INNER JOIN candidates ON candidates.cand_id == riding_candidates.cand_id
-                                WHERE riding_candidates.riding_id == ${riding_num}`);
+                                WHERE riding_candidates.riding_id == ${riding_num}
+                                ORDER BY riding_candidates.result DESC`);
     var total_votes = 0;
     for (var i = 0; i < vote_results.length; i++) {
         total_votes += vote_results[i].result;
@@ -56,5 +57,7 @@ module.exports.get_riding_data = async function(year, riding_num) {
     //remove double hyphens in riding name
     riding.name = riding.name.replace(/--/g, '-');
     riding.total_votes = total_votes;
+    //add the winner
+    riding.winner = vote_results[0];
     return riding;
 }   

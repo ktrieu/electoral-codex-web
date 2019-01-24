@@ -20,7 +20,8 @@ var handlebarOpts = {
     helpers : {
         json : JSON.stringify,
         party_noun: helpers.party_to_noun,
-        majority_seats: helpers.majority_seats
+        majority_seats: helpers.majority_seats,
+        percent: helpers.percent
     }
 }
 
@@ -59,6 +60,7 @@ app.get('/:year/riding/:riding_num', function(req, res) {
             riding: riding_data,
             map_bounds: riding_bounds[req.params.year][req.params.riding_num][0]
         });
+        console.log(riding_data);
     }).catch(function (err) {
         res.send(err);
     });

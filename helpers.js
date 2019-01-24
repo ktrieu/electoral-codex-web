@@ -19,3 +19,7 @@ module.exports.majority_seats = function(total_seats) {
         return Math.ceil(total_seats / 2);
     }
 }
+
+module.exports.percent = function(percent) {
+    return `${(percent * 100).toFixed(2)}%`;
+}

@@ -3,7 +3,7 @@ initVoteGraph = function() {
     var resultsData = Object.entries(RIDING.votes).sort((a, b) => { return a[1].result < b[1].result; });
     var height = resultsData.length * barHeight;
 
-    var margin = {top: 20, left: 150, right: 120, bottom: 20};
+    var margin = {top: 50, left: 200, right: 120, bottom: 20};
     var container = d3.select('#vote-graph');
     var containerWidth = container.node().clientWidth;
     var containerHeight = height + margin.top + margin.bottom;

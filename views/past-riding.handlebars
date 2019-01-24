@@ -9,6 +9,13 @@
 <div class="container">
     <h1 class='riding-header'>{{riding.name}}</h1>
     <p class='text-muted year-label'>{{year}} RESULTS</p>
+    {{#with riding}}
+    <div class='vertical-block'>
+        <h1 class='solid-{{winner.party}} winner-name'>{{winner.name}}</h1>
+        <p>and the <span class='solid-{{winner.party}}'> {{party_noun winner.party}}</span>
+        won this riding, with {{percent winner.percent}} of the vote. </p>
+    </div>
+    {{/with}}
     <div id='vote-graph'></div>
     <div id="map-riding"></div>
 </div>
