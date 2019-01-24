@@ -6,10 +6,6 @@
     height: 300px;
 }
 
-body {
-    font-family: 'IBM Plex Sans', sans-serif;
-}
-
 .election-header {
     border-bottom: 2px solid black;
     margin-bottom: 20px;

@@ -41,6 +41,10 @@
     font-weight: bold;
 }
 
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .vertical-block {
     margin-bottom: 10px;
 }
