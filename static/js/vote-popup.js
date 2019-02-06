@@ -98,8 +98,7 @@ updatePopup = function(popup, e) {
             totalVote += ridingProps[key];
         }
     }
-    //sort by vote count
-    votePairs.sort((a, b) => a[1] < b[1]);
+    votePairs = votePairs.sort((a, b) => { return -(a[1] - b[1]) });
     var resultArray = [];
     for (var i = 0; i < 3; i++) {
         resultArray.push({
