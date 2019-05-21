@@ -87,4 +87,9 @@ typings/
 !.vscode/extensions.json
 
 db/*
+
+#Openode stuff
 .openode
+docker-compose.yml
+Dockerfile
+
