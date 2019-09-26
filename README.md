@@ -1,6 +1,6 @@
 # Electoral Codex
 
-Now live at http://ec2-54-89-32-10.compute-1.amazonaws.com (forgive my lack of a domain)
+Now live at https://elections.kevintrieu.com
 
 A website to visualize elections data from my other repository, [Electoral Codex.](https://github.com/ktrieu/electoral-codex)
 Highlights include an interactive map for for every polling division in every election from 2004-2015, and some more detailed graphics using D3.
